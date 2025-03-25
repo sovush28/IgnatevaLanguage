@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IgnatevaLanguage"
         mc:Ignorable="d"
-        Title="Игнатьева Лангуаге" Height="600" Width="800"
+        Title="Игнатьева Лангуаге" Height="650" Width="950"
         FontFamily="Comic Sans MS" Icon="img/school_logo.ico"
         MinHeight="450" MinWidth="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="75"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid Background="#FFE7FABF"/>
         <Image Source="img/school_logo.png" HorizontalAlignment="Left"/>
