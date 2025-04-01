@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IgnatevaLanguage"
         mc:Ignorable="d"
-        Title="Игнатьева Лангуаге" Height="650" Width="950"
+        Title="Игнатьева Лангуаге" Height="700" Width="950"
         FontFamily="Comic Sans MS" Icon="img/school_logo.ico"
         MinHeight="450" MinWidth="800">
     <Grid>

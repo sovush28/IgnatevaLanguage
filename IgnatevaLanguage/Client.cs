@@ -67,7 +67,7 @@ namespace IgnatevaLanguage
             }
         }
 
-        //дата последнего посещения
+        //строковая дата последнего посещения
         public string LatestVisitDateString
         {
             get
@@ -81,6 +81,22 @@ namespace IgnatevaLanguage
                 else return "нет";
             }
         }
+
+        //дата последнего посещения
+        public DateTime? LatestVisitDate
+        {
+            get
+            {
+                var visitRecords = ClientService.Where(p => p.ClientID == this.ID).ToList();
+                if (visitRecords != null && visitRecords.Any())
+                {
+                    DateTime latestVisitDate = visitRecords.Max(p => p.StartTime);
+                    return latestVisitDate.Date;
+                }
+                else return null;
+            }
+        }
+
 
 
         //кол-во посещений

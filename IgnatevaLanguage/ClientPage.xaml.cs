@@ -33,10 +33,11 @@ namespace IgnatevaLanguage
             InitializeComponent();
             var currentClients = IgnatevaLanguageEntities.GetContext().Client.ToList();
             
-
             ClientListView.ItemsSource = currentClients;
 
             ShownRecordsCombo.SelectedIndex = 0;
+            GenderCombo.SelectedIndex = 0;
+            SortCombo.SelectedIndex = 0;
 
             UpdateClients();
         }
@@ -44,6 +45,9 @@ namespace IgnatevaLanguage
         private void UpdateClients()
         {
             var currentClients = IgnatevaLanguageEntities.GetContext().Client.ToList();
+            
+            RecordsQ = currentClients.Count;
+            AllRecordsQTB.Text = RecordsQ.ToString();
 
             switch (ShownRecordsCombo.SelectedIndex)
             {
@@ -66,17 +70,58 @@ namespace IgnatevaLanguage
                 case 3:
                     RecordsOnPage = RecordsQ;
                     //ShowAllRecords = true;
-                    break;                        
+                    break;
+            }
+
+            switch (GenderCombo.SelectedIndex)
+            {
+                case 0:
+                    currentClients = currentClients.Where(p => p.GenderCode == "ж" || p.GenderCode == "м").ToList();
+                    break;
+
+                case 1:
+                    currentClients = currentClients.Where(p => p.GenderCode == "ж").ToList();
+                    break;
+
+                case 2:
+                    currentClients = currentClients.Where(p => p.GenderCode == "м").ToList();
+                    break;
+            }
+
+            currentClients = currentClients.Where(p => p.LastName.ToLower().Contains(SearchTB.Text.ToLower()) ||
+            p.FirstName.ToLower().Contains(SearchTB.Text.ToLower()) ||
+            p.Patronymic.ToLower().Contains(SearchTB.Text.ToLower()) ||
+            p.Email.Replace("@","").Replace(".","").Contains(SearchTB.Text.Replace("@", "").Replace(".", "")) ||
+            p.Phone.Replace(" ","").Replace("(","").Replace(")","").Replace("-","").
+            Contains(SearchTB.Text.Replace(" ", "").Replace("(", "").Replace(")", "").Replace("-", ""))
+            ).ToList();
+
+            var clientsWithoutSort = currentClients;
+
+            switch (SortCombo.SelectedIndex)
+            {
+                case 0:
+                    currentClients = clientsWithoutSort;
+                    break;
+
+                case 1:
+                    currentClients = currentClients.OrderBy(p => p.LastName).ToList();
+                    break;
+
+                case 2:
+                    currentClients = currentClients.OrderByDescending(p => p.LatestVisitDate).ToList();
+                    break;
+
+                case 3:
+                    currentClients = currentClients.OrderByDescending(p => p.VisitCount).ToList();
+                    break;
             }
 
             ClientListView.ItemsSource = currentClients;
+
             TableList = currentClients;
 
-            RecordsQ = TableList.Count;
-
             ShownRecordsQTB.Text = currentClients.Count.ToString();
-            AllRecordsQTB.Text = RecordsQ.ToString();
-
             ChangePage(0, 0);
 
         }
@@ -217,6 +262,21 @@ namespace IgnatevaLanguage
             }
             else
                 return;
+        }
+
+        private void GenderCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateClients();
+        }
+
+        private void SortCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateClients();
+        }
+
+        private void SearchTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            UpdateClients();
         }
 
         private void ShownRecordsCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)

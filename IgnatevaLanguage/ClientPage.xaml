@@ -16,6 +16,33 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="Поиск:" FontSize="16" Margin="5"/>
+
+            <TextBox Name="SearchTB" FontSize="16" Margin="5" Height="26" Width="300"
+                     TextChanged="SearchTB_TextChanged"/>
+
+            <TextBlock Text="  Пол:" FontSize="16" Margin="5"/>
+
+            <ComboBox Name="GenderCombo" FontSize="16"
+                      Height="26" Width="100"
+                      SelectionChanged="GenderCombo_SelectionChanged">
+                <TextBlock>Все</TextBlock>
+                <TextBlock>Женский</TextBlock>
+                <TextBlock>Мужской</TextBlock>
+            </ComboBox>
+
+            <TextBlock Text="  Сортировка:" FontSize="16" Margin="5"/>
+
+            <ComboBox Name="SortCombo" FontSize="16" Margin="5" Height="26" Width="270"
+                      SelectionChanged="SortCombo_SelectionChanged">
+                <TextBlock>нет</TextBlock>
+                <TextBlock>по фамилии от А до Я</TextBlock>
+                <TextBlock>по дате последнего посещения</TextBlock>
+                <TextBlock>по количеству посещений</TextBlock>
+            </ComboBox>
+        </StackPanel>
+        
         <ListView Name="ClientListView" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
