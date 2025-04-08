@@ -19,7 +19,7 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock Text="Поиск:" FontSize="16" Margin="5"/>
 
-            <TextBox Name="SearchTB" FontSize="16" Margin="5" Height="26" Width="300"
+            <TextBox Name="SearchTB" FontSize="16" Margin="5" Height="26" Width="250"
                      TextChanged="SearchTB_TextChanged"/>
 
             <TextBlock Text="  Пол:" FontSize="16" Margin="5"/>
@@ -34,13 +34,16 @@
 
             <TextBlock Text="  Сортировка:" FontSize="16" Margin="5"/>
 
-            <ComboBox Name="SortCombo" FontSize="16" Margin="5" Height="26" Width="270"
+            <ComboBox Name="SortCombo" FontSize="16" Margin="5" Height="26" Width="260"
                       SelectionChanged="SortCombo_SelectionChanged">
                 <TextBlock>нет</TextBlock>
                 <TextBlock>по фамилии от А до Я</TextBlock>
                 <TextBlock>по дате последнего посещения</TextBlock>
                 <TextBlock>по количеству посещений</TextBlock>
             </ComboBox>
+
+            <Button Content="добавить клиента" Name="AddBtn" Click="AddBtn_Click"
+                    Width="200" FontSize="18"/>
         </StackPanel>
         
         <ListView Name="ClientListView" Grid.Row="1">
@@ -49,7 +52,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="540"/>
+                            <ColumnDefinition Width="600"/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -115,9 +118,15 @@
                                        FontSize="16"/>
                         </WrapPanel>
 
-                        <Button Content="удалить" Name="DeleteBtn" Click="DeleteBtn_Click"
-                                Grid.Column="2" Grid.Row="0" Grid.RowSpan="5"
-                                VerticalAlignment="Center" FontSize="18"/>
+                        <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0" Grid.RowSpan="5"
+                                    VerticalAlignment="Center">
+                            <Button Content="удалить" Name="DeleteBtn" Click="DeleteBtn_Click"
+                                FontSize="18"/>
+
+                            <Button Content="редактировать" Name="EditBtn" Click="EditBtn_Click"
+                                    FontSize="18"/>
+                        </StackPanel>
+                        
 
                     </Grid>
                 </DataTemplate>

@@ -279,6 +279,28 @@ namespace IgnatevaLanguage
             UpdateClients();
         }
 
+        private void EditBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddEditWindow addEditWindow = new AddEditWindow((sender as Button).DataContext as Client);
+            if (addEditWindow.ShowDialog() == true)
+            {
+                ClientListView.Items.Refresh();
+            }
+            UpdateClients();
+
+        }
+
+        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        {
+            AddEditWindow addEditWindow = new AddEditWindow(null);
+            if (addEditWindow.ShowDialog() == true)
+            {
+                ClientListView.Items.Refresh();
+            }
+            UpdateClients();
+
+        }
+
         private void ShownRecordsCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             UpdateClients();

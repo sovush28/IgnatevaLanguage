@@ -42,7 +42,6 @@ namespace IgnatevaLanguage
             }
         }
 
-
         public string Email { get; set; }
         public System.DateTime RegistrationDate { get; set; }
     
